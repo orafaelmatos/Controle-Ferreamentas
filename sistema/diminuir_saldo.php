@@ -8,14 +8,14 @@ $antiga = filter_input(INPUT_POST, 'antiga');
 
 if($quantidade){
     $sql = $pdo->prepare("UPDATE ferramentas SET quantidade = :quantidade WHERE codigo = :id");
-    $sql->bindValue(':quantidade', $quantidade + $antiga);
+    $sql->bindValue(':quantidade', $antiga - $quantidade);
     $sql->bindValue(':id', $id);
     $sql->execute();
 
     header('location: estoque.php');
-
+    
 }else{
-    echo "Nenhum valore informado";
+    echo "Valor incorreto";
 }
 
 ?>

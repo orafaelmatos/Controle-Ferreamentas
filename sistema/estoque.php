@@ -108,15 +108,16 @@ require_once 'connection.php';
         <td><?php echo $dados['quantidade']?></td>
         <td>
             <button type="submit"><a href="aumentar.php?id=<?=$dados['codigo']?>">Aumentar</a></button></input>
+
         </td>
-        <td><button type=" submit">Diminuir</button>
+        <td><button type=" submit"><a href="diminuir.php?id=<?=$dados['codigo']?>">Diminuir</a></button>
         </td>
 
     </tr>
     <?php } endforeach;?>
     <?php }?>
 </table>
-<a href="index.php">Home Page</a>
+<a href=" index.php">Home Page</a>
 
 <!-- <form action="">
     <label for="ferramenta">Ferramenta</label>

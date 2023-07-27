@@ -23,7 +23,7 @@ if($id){
 
 <h1>Alterar Quantidade</h1>
 
-<form action="aumentar_saldo.php" method="POST">
+<form action="diminuir_saldo.php" method="POST">
     <input type="hidden" name="id" value="<?= $ferramenta['codigo'] ?>">
     <input type="hidden" name="antiga" value="<?= $ferramenta['quantidade'] ?>">
 
