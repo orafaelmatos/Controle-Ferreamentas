@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panflight</title>
+    <title>Estoque</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    
 </head>
 <body>
 <?php 
@@ -15,7 +16,7 @@ require_once 'connection.php';
 ?>
     <header class= "cabecalho">
         <div class="cabecalho_logo">
-            <a href="#">
+            <a href="index.php">
                 <img src="./assets/image/panflight_logo.png" width="120px" height="120px" class="logo" alt="">
             </a>
         </div>
@@ -30,6 +31,22 @@ require_once 'connection.php';
 
    
     </header>
+    <section class="consulta">
+    
+
+        <h1>Busca por Ferramentas</h1>
+        <form method="get" action="">
+            <input type="text" name="busca" value="<?=!isset($_GET['busca']) ? 'PN ou Ferramenta' : $_GET['busca']?>">
+            <button type="submit">Pesquisar</button>
+        </form>
+        
+        <?php 
+
+        require_once 'estoque.php';
+
+
+        ?>
+    </section>
 
  
 </body>

@@ -1,14 +1,4 @@
-<?php 
 
-require_once 'connection.php';
-
-?>
-
-<h1>Busca por Ferramentas</h1>
-<form method="get" action="">
-    <input type="text" name="busca" value="<?=!isset($_GET['busca']) ? 'PN ou Ferramenta' : $_GET['busca']?>">
-    <button type="submit">Pesquisar</button>
-</form>
 <br>
 
 <table border="1">
@@ -69,6 +59,7 @@ require_once 'connection.php';
 
     <tr>
         <th>Código</th>
+        <th>Pn</th>
         <th>Descrição</th>
 
     </tr>
@@ -79,7 +70,8 @@ require_once 'connection.php';
         ?>
     <tr>
         <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['codigo'];}?></td>
-        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['ferramenta'];}?></td>
+        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['pn'];}?></td>
+        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['descricao'];}?></td>
 
     </tr>
     <?php } endforeach;?>
@@ -117,7 +109,7 @@ require_once 'connection.php';
     <?php } endforeach;?>
     <?php }?>
 </table>
-<a href=" index.php">Home Page</a>
+
 
 <!-- <form action="">
     <label for="ferramenta">Ferramenta</label>
