@@ -12,7 +12,7 @@ if($quantidade){
     $sql->bindValue(':id', $id);
     $sql->execute();
 
-    header('location: estoque.php');
+    header('location: direction_estoque.php');
     
 }else{
     echo "Valor incorreto";
