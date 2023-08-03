@@ -17,12 +17,15 @@ if($codigo){
         $sql->bindValue(':codigo', $codigo);
         $sql->bindValue(':quantidade', $quantidade);
         $sql->execute();
-
-        header('location: index.php');
-    }else{
+        
         header('location: cadastrar_ferramenta.php');
+        
+    }else{
+        echo "Ferramenta já cadastrada";
     }
 }else{
-    header('location: cadastrar_ferramenta.php');
+    echo "Digite um código";
 }
 ?>
+<br>
+<a href="cadastrar_ferramenta.php">Tente novamente</a>

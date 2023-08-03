@@ -1,16 +1,9 @@
-
 <br>
 
 <table border="1">
 
-    <!-- <tr>
-        <th>idferramentas</th>
-        <th>Ferramenta</th>
-        <th>Código</th>
-        <th>Quantidade</th>
-
-    </tr> -->
-    <?php 
+    <?php
+    // Verificando se foi passado algum valor. 
     if(!isset($_GET['busca'])){
     ?>
     <tr>
@@ -18,6 +11,7 @@
     </tr>
     <?php 
     }else{
+    // Query para selecionar todas ferramentas que sejam iguais a que foi digitada. 
         $pesquisa = $_GET['busca'];
         $sql_code = "SELECT * FROM ferramentas
         WHERE ferramenta LIKE '%$pesquisa%'
@@ -27,60 +21,76 @@
         $sql = $pdo->query($sql_code);
         $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
          
-        
+    // Query para selecionar o PN que foi digitado.
         $sql_code_pn = "SELECT * FROM peças
         WHERE pn LIKE '%$pesquisa%'";
         $lista_pn = [];
         $sql = $pdo->query($sql_code_pn);
         $lista_pn = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-        
-        if($sql->rowCount() == 0 && empty($lista_pn) && empty($lista)){
+    // Verificando se o valor inserido é uma peça ou uma ferramenta
+        if($sql->rowCount() == 0 && empty($lista_pn) && empty($lista)){ 
         ?>
     <tr>
         <td colspan="4">Nenhum resultado encontrado...</td>
     </tr>
 
-    <?php } if(!empty($lista_pn)){
-        
+    <?php } 
+    
+    // Verificando se o valor passado foi um PN.
+        if(!empty($lista_pn)){ 
         $pesquisa = $_GET['busca'];
-        $sql_code_estrutura = "SELECT p.pn, p.descricao, f.codigo, f.ferramenta FROM ferramentas f
+        $sql_code_estrutura = "SELECT p.pn, p.descricao, f.codigo, f.ferramenta FROM ferramentas f 
         JOIN estrutura e
         ON f.idferramentas = e.ferrametas_id
         JOIN peças p 
-        ON e.peças_id = p.idpeça
+        ON e.peças_id = p.idpeça WHERE pn LIKE '%$pesquisa%'
         ";
         
+        // Query para pegas estrutura de cada peça.
         $lista_estrutura = [];
         $sql = $pdo->query($sql_code_estrutura);
-        $lista_estrutura = $sql->fetchAll(PDO::FETCH_ASSOC);
-        
+        $lista_estrutura = $sql->fetchAll(PDO::FETCH_ASSOC);    
         ?>
 
     <tr>
         <th>Código</th>
-        <th>Pn</th>
         <th>Descrição</th>
-
     </tr>
+
     <?php
-   
-       
+    
+   // Verificando se foi passado algum valor.
+   if(!empty($_GET['busca']))
     foreach($lista_estrutura as $dados) : {
         ?>
     <tr>
-        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['codigo'];}?></td>
-        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['pn'];}?></td>
-        <td><?php if($dados['pn'] == $_GET['busca'] || empty($_GET['busca'])) {echo $dados['descricao'];}?></td>
-
+        <td><?php if($dados['pn'] == $_GET['busca']) {echo $dados['codigo'];}?>
+        </td>
+        <td><?php if($dados['pn'] == $_GET['busca']) {echo $dados['ferramenta'];}?></td>
     </tr>
+
     <?php } endforeach;?>
-    <?php }?>
+    <?php } 
+    
+    // Verificando se nenhum valor foi passado.
+    if(empty($_GET['busca'])){
+        foreach($lista_pn as $dados) : {
+            ?>
+    <tr>
+        <td><?php echo $dados['pn'];}?>
+        </td>
+        <td><?php echo $dados['descricao'];?></td>
+    </tr>
+    <?php endforeach;}?>
 
 </table>
 
 <table border="1">
-    <?php }if(!empty($lista)){
+    <?php }
+    
+    // Verificando se o valor passado foi uma ferramenta. 
+    if(!empty($lista)){
         
         ?>
     <tr>
@@ -109,14 +119,3 @@
     <?php } endforeach;?>
     <?php }?>
 </table>
-
-
-<!-- <form action="">
-    <label for="ferramenta">Ferramenta</label>
-    <input type="text" name="ferramenta" id="ferramenta">
-
-    <label for="codigo">Código</label>
-    <input type="text" name="codigo" id="codigo">
-
-    <input type="submit" value="Consultar">
-</form> -->

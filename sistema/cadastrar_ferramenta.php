@@ -11,5 +11,5 @@
     <label for="quantidade">Quantidade</label>
     <input type="text" name="quantidade" id="quantidade">
     <input type="submit" value="Adicionar">
-
 </form>
+<a href="index.php">Home</a>
